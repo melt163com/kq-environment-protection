@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.tree.mapper.TreeStructureMapper">
+
+
+  <!-- 查询数据库全部数据 -->
+  <select id="selectAll" parameterType="com.demo.tree.domain.TreeStructure" resultType="com.demo.tree.domain.TreeStructure">
+        select * from tree_structure
+    </select>
+
+  <!-- 查找共有多少层级 -->
+  <select id="selectLevel" resultType="Integer">
+        select count(distinct pid) from tree_structure
+    </select>
+
+
+
+
+
+
+</mapper>

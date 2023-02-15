@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.yunshucheliangxinxi.mapper.YsclxxMapper">
+
+  <resultMap id="yunshucheliangxinxi" type="com.demo.yunshucheliangxinxi.domain.Ysclxx">
+    <id column="cl_id" property="cl_id"></id>
+    <result column="cl_cph" property="cl_cph"></result>
+    <result column="cl_cdmc" property="cl_cdmc"></result>
+    <result column="cl_cz" property="cl_cz"></result>
+    <result column="cl_dz" property="cl_dz"></result>
+
+    <result column="cl_ppxh" property="cl_ppxh"></result>
+    <result column="cl_sbm" property="cl_sbm"></result>
+    <result column="cl_hdzzl" property="cl_hdzzl"></result>
+    <result column="cl_fdjhm" property="cl_fdjhm"></result>
+
+    <result column="cl_fdjxh" property="cl_fdjxh"></result>
+    <result column="zcrq" property="zcrq"></result>
+    <result column="fzrq" property="fzrq"></result>
+    <result column="obdanzhrq" property="obdanzhrq"></result>
+    <result column="obd" property="obd"></result>
+
+    <result column="cljinchu_type" property="cljinchu_type"></result>
+    <result column="cargo_type" property="cargo_type"></result>
+    <result column="cl_dengjishiyou" property="cl_dengjishiyou"></result>
+    <result column="cl_tihuodanwei" property="cl_tihuodanwei"></result>
+
+    <result column="cl_qiyundi" property="cl_qiyundi"></result>
+    <result column="cl_huowushuliang" property="cl_huowushuliang"></result>
+    <result column="bumen_type" property="bumen_type"></result>
+    <result column="bumen_name" property="bumen_name"></result>
+
+    <result column="sj_name" property="sj_name"></result>
+    <result column="sj_phone" property="sj_phone"></result>
+    <result column="sj_sfz" property="sj_sfz"></result>
+    <association property="cx_id" javaType="com.demo.yunshucheliangxinxi.domain.YunShuCheXing">
+      <id column="cx_id" property="cx_id"></id>
+      <result column="cx_type" property="cx_type"></result>
+    </association>
+    <association property="cp_id" javaType="com.demo.yunshucheliangxinxi.domain.YunShuChePaiYanSe">
+      <id column="cp_id" property="cp_id"></id>
+      <result column="cp_type" property="cp_type"></result>
+    </association>
+    <association property="clrl_id" javaType="com.demo.yunshucheliangxinxi.domain.YunShuCheLiangRanFang">
+      <id column="clrl_id" property="clrl_id"></id>
+      <result column="clrl_type" property="clrl_type"></result>
+    </association>
+    <association property="clpf_id" javaType="com.demo.yunshucheliangxinxi.domain.YunShuCheLiangPaiFang">
+      <id column="clpf_id" property="clpf_id"></id>
+      <result column="clpf_type" property="clpf_type"></result>
+    </association>
+
+    <association property="clsyxz_id" javaType="com.demo.yunshucheliangxinxi.domain.YunShuCheLiangShiYongXingZhi">
+      <id column="clsyxz_id" property="clsyxz_id"></id>
+      <result column="clsyxz_type" property="clsyxz_type"></result>
+    </association>
+
+  </resultMap>
+
+  <select id="CheLiangXinZheng" resultMap="yunshucheliangxinxi">
+SELECT
+	y.*,
+	ys.cp_type,
+	cx.cx_type,
+	pf.clpf_type,
+	rl.clrl_type,
+	syxz.clsyxz_type
+FROM
+	ysclxxb y
+	INNER JOIN cl_cpysb ys ON y.cp_id = ys.cp_id
+	INNER JOIN clcxb cx ON y.cx_id = cx.cx_id
+	INNER JOIN clpfb pf ON y.clpf_id = pf.clpf_id
+	INNER JOIN clrlb rl ON y.clrl_id = rl.clrl_id
+	INNER JOIN clsyxzb syxz ON y.clsyxz_id = syxz.clsyxz_id
+
+</select>
+
+<insert id="addCheLiang">
+
+INSERT INTO ysclxxb
+VALUES
+	(
+	#{cl_id},
+	#{cljinchu_type},
+	#{cl_cph},
+	#{cl_cdmc},
+	#{cl_cz},
+	#{cl_dz},
+	#{cl_ppxh},
+	#{cl_sbm},
+	#{cl_hdzzl},
+	#{cl_fdjhm},
+	#{cl_fdjxh},
+	#{zcrq},
+	#{fzrq},
+	#{obdanzhrq},
+	#{obd},
+	#{cx_id},
+	#{cp_id},
+	#{clrl_id},
+	#{clpf_id},
+	#{clsyxz_id},
+	#{cargo_type},
+	#{cl_dengjishiyou},
+	#{cl_tihuodanwei},
+	#{cl_qiyundi},
+	#{cl_huowushuliang},
+	#{bumen_type},
+	#{bumen_name},
+	#{sj_name},
+	#{sj_phone},
+	#{sj_sfz}
+	)
+</insert>
+
+
+</mapper>

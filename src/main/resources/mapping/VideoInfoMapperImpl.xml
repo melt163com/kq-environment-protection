@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.video.mapper.VideoMapper">
+
+<!--    查询所有视频信息-->
+    <select id="videoInfo" resultType="com.demo.video.domain.Video">
+        select *
+        from video
+    </select>
+<!--    根据检测点名称查询-->
+    <select id="videoInfoByPointName" resultType="com.demo.video.domain.Video">
+        select *
+        from video
+        where monitoring_point_name = #{monitoring_point_name}
+    </select>
+<!--    根据摄像头名称查询-->
+    <select id="videoInfoByCameraName" resultType="com.demo.video.domain.Video">
+        select *
+        from video
+        where camera_name = #{camera_name}
+    </select>
+</mapper>

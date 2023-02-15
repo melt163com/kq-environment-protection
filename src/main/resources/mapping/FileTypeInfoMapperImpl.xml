@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.filetype.mapper.FileTypeMapper">
+    <!--    查询所有分类信息-->
+    <select id="FileTypeInfo" resultType="com.demo.filetype.domain.FileType">
+        select *
+        from filetype
+    </select>
+    <!--    根据分类名称查询-->
+    <select id="FileTypeInfoByTypeName" resultType="com.demo.filetype.domain.FileType">
+        select *
+        from filetype
+        where type_name = #{type_name}
+    </select>
+    <!--    新增分类信息-->
+    <insert id="InsertFileType" parameterType="com.demo.filetype.domain.FileType">
+        INSERT INTO filetype (type_name,parent_classification,description,creator,create_time)
+        VALUES (#{type_name},#{parent_classification},#{description},#{creator},#{create_time});
+    </insert>
+    <!--    修改分类信息-->
+    <update id="updateFileType" parameterType="com.demo.filetype.domain.FileType">
+        update filetype
+        <set>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="type_name != null">
+                type_name = #{type_name},
+            </if>
+            <if test="parent_classification != null">
+                parent_classification = #{parent_classification},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="creator != null">
+                creator = #{creator},
+            </if>
+            <if test="create_time != null">
+                create_time = #{create_time},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--    删除分类信息-->
+    <delete id="deleteFileType" parameterType="com.demo.filetype.domain.FileType">
+        delete from filetype
+        <where>
+            id=#{id}
+        </where>
+    </delete>
+</mapper>
